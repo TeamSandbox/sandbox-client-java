@@ -1,5 +1,8 @@
 # Changelog
 
+## v1.1.0
+* Updated gst gsp public client
+
 ## v1.0.2 - 27-09-2021
 * Support for UAT environment
 * Used generic return type for Search GSTIN by PAN method
@@ -17,3 +20,4 @@
 * Calculator APIs added
 * Tax payer Verification API client bug fix
 * GSTIN API client added
+

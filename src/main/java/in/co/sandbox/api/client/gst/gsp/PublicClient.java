@@ -21,19 +21,17 @@ import in.co.sandbox.api.types.ENDPOINTS.Environment;
 /**
  * The Class PublicClient.
  */
-public class PublicClient extends RestClient
-{
+public class PublicClient extends RestClient {
 
 	/**
 	 * Instantiates a new public client.
 	 *
 	 * @param sessionCredentials
-	 *            the session credentials
+	 *                           the session credentials
 	 * @param enableDebugLog
-	 *            the enable debug log
+	 *                           the enable debug log
 	 */
-	public PublicClient(final ApiSessionCredentials sessionCredentials, final boolean enableDebugLog)
-	{
+	public PublicClient(final ApiSessionCredentials sessionCredentials, final boolean enableDebugLog) {
 		super(sessionCredentials, enableDebugLog);
 	}
 
@@ -41,24 +39,24 @@ public class PublicClient extends RestClient
 	 * Track GST return.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *                      the gstin
 	 * @param financialYear
-	 *            the financial year
+	 *                      the financial year
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject trackGSTReturn(final String gstin, final String financialYear) throws SandboxException
-	{
+	public JSONObject trackGSTReturn(final String gstin, final String financialYear, final String gstr)
+			throws SandboxException {
 
-		try
-		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.TRACK_GST_RETURN,
-			        Environment.get(sessionCredentials.getApiKey()), gstin, financialYear));
+		try {
+			JSONObject body = new JSONObject();
+			body.put("gstin", gstin);
+			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.TRACK_GST_RETURN,
+					Environment.get(sessionCredentials.getApiKey()), financialYear, gstr), body);
+
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500);
 		}
 
@@ -68,23 +66,22 @@ public class PublicClient extends RestClient
 	 * Search gstin.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *              the gstin
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject searchGstin(final String gstin) throws SandboxException
-	{
+	public JSONObject searchGstin(final String gstin) throws SandboxException {
 
-		try
-		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.SEARCH_GSTIN,
-			        Environment.get(sessionCredentials.getApiKey()), gstin));
+		try {
+			JSONObject body = new JSONObject();
+			body.put("gstin", gstin);
+			ApiResponse response = super.postForGet(
+					ENDPOINTS.build(ENDPOINTS.URL.SEARCH_GSTIN, Environment.get(sessionCredentials.getApiKey()), null),
+					body);
 
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500);
 		}
 
@@ -94,28 +91,26 @@ public class PublicClient extends RestClient
 	 * Search gstin by pan.
 	 *
 	 * @param <T>
-	 *            the generic type
+	 *                  the generic type
 	 * @param pan
-	 *            the pan
+	 *                  the pan
 	 * @param stateCode
-	 *            the state code
+	 *                  the state code
 	 * @return the t
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public <T> T searchGstinByPan(final String pan, final String stateCode) throws SandboxException
-	{
+	public <T> T searchGstinByPan(final String pan, final String stateCode) throws SandboxException {
 
-		try
-		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.SEARCH_GSTIN_BY_PAN,
-			        Environment.get(sessionCredentials.getApiKey()), pan, stateCode));
+		try {
+			JSONObject body = new JSONObject();
+			body.put("pan", pan);
+			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.SEARCH_GSTIN_BY_PAN,
+					Environment.get(sessionCredentials.getApiKey()), stateCode), body);
 
 			return response.get("data");
 
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500);
 		}
 
@@ -125,24 +120,20 @@ public class PublicClient extends RestClient
 	 * Generate OTP.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *                 the gstin
 	 * @param username
-	 *            the username
+	 *                 the username
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject generateOTP(final String gstin, final String username) throws SandboxException
-	{
-		try
-		{
+	public JSONObject generateOTP(final String gstin, final String username) throws SandboxException {
+		try {
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.GST_GENERATE_OTP,
-			        Environment.get(sessionCredentials.getApiKey()), gstin, username), null);
+					Environment.get(sessionCredentials.getApiKey()), gstin, username), null);
 
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500, e);
 		}
 	}
@@ -151,27 +142,23 @@ public class PublicClient extends RestClient
 	 * Verify OTP.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *                 the gstin
 	 * @param username
-	 *            the username
+	 *                 the username
 	 * @param otp
-	 *            the otp
+	 *                 the otp
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject verifyOTP(final String gstin, final String username, final String otp) throws SandboxException
-	{
+	public JSONObject verifyOTP(final String gstin, final String username, final String otp) throws SandboxException {
 
-		try
-		{
+		try {
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.GST_VERIFY_OTP,
-			        Environment.get(sessionCredentials.getApiKey()), gstin, username, otp), null);
+					Environment.get(sessionCredentials.getApiKey()), gstin, username, otp), null);
 
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500, e);
 		}
 	}
@@ -180,23 +167,19 @@ public class PublicClient extends RestClient
 	 * Session expiery.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *              the gstin
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject sessionExpiry(final String gstin) throws SandboxException
-	{
+	public JSONObject sessionExpiry(final String gstin) throws SandboxException {
 
-		try
-		{
+		try {
 			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.GST_SESSION_EXPIRY,
-			        Environment.get(sessionCredentials.getApiKey()), gstin));
+					Environment.get(sessionCredentials.getApiKey()), gstin));
 
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500, e);
 		}
 	}
@@ -205,23 +188,19 @@ public class PublicClient extends RestClient
 	 * Referesh taxpayer access.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *              the gstin
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject refereshTaxpayerAccess(final String gstin) throws SandboxException
-	{
+	public JSONObject refereshTaxpayerAccess(final String gstin) throws SandboxException {
 
-		try
-		{
+		try {
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.GST_REFERESH_TAXPAYER_ACCESS,
-			        Environment.get(sessionCredentials.getApiKey()), gstin), null);
+					Environment.get(sessionCredentials.getApiKey()), gstin), null);
 
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500, e);
 		}
 	}
@@ -230,23 +209,19 @@ public class PublicClient extends RestClient
 	 * Taxpayer logout.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *              the gstin
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject taxpayerLogout(final String gstin) throws SandboxException
-	{
+	public JSONObject taxpayerLogout(final String gstin) throws SandboxException {
 
-		try
-		{
+		try {
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.GST_TAXPAYER_LOGOUT,
-			        Environment.get(sessionCredentials.getApiKey()), gstin), null);
+					Environment.get(sessionCredentials.getApiKey()), gstin), null);
 
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500, e);
 		}
 
@@ -256,27 +231,23 @@ public class PublicClient extends RestClient
 	 * Generate EVCOTP.
 	 *
 	 * @param gstin
-	 *            the gstin
+	 *              the gstin
 	 * @param gstr
-	 *            the gstr
+	 *              the gstr
 	 * @param pan
-	 *            the pan
+	 *              the pan
 	 * @return the JSON object
 	 * @throws SandboxException
-	 *             the sandbox exception
+	 *                          the sandbox exception
 	 */
-	public JSONObject generateEVCOTP(final String gstin, final String gstr, final String pan) throws SandboxException
-	{
+	public JSONObject generateEVCOTP(final String gstin, final String gstr, final String pan) throws SandboxException {
 
-		try
-		{
+		try {
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.GST_GENERATE_EVC_OTP,
-			        Environment.get(sessionCredentials.getApiKey()), gstin, gstr, pan), null);
+					Environment.get(sessionCredentials.getApiKey()), gstin, gstr, pan), null);
 
 			return response.get("data");
-		}
-		catch (final IOException e)
-		{
+		} catch (final IOException e) {
 			throw new SandboxException("Internal Server Error", 500, e);
 		}
 	}
