@@ -44,6 +44,8 @@ public class PublicClient extends RestClient
 	 *            the gstin
 	 * @param financialYear
 	 *            the financial year
+	 * @param gstr
+	 *            the gstr
 	 * @return the JSON object
 	 * @throws SandboxException
 	 *             the sandbox exception
@@ -55,9 +57,9 @@ public class PublicClient extends RestClient
 		try
 		{
 			JSONObject body = new JSONObject();
-			
+
 			body.put("gstin", gstin);
-			
+
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.TRACK_GST_RETURN,
 			        Environment.get(sessionCredentials.getApiKey()), financialYear, gstr), body);
 
@@ -85,9 +87,9 @@ public class PublicClient extends RestClient
 		try
 		{
 			JSONObject body = new JSONObject();
-			
+
 			body.put("gstin", gstin);
-			
+
 			ApiResponse response = super.postForGet(
 			        ENDPOINTS.build(ENDPOINTS.URL.SEARCH_GSTIN, Environment.get(sessionCredentials.getApiKey())), body);
 
@@ -119,9 +121,9 @@ public class PublicClient extends RestClient
 		try
 		{
 			JSONObject body = new JSONObject();
-			
+
 			body.put("pan", pan);
-			
+
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.SEARCH_GSTIN_BY_PAN,
 			        Environment.get(sessionCredentials.getApiKey()), stateCode), body);
 
