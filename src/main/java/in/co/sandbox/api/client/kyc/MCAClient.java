@@ -1,4 +1,4 @@
-package in.co.sandbox.api.client.bank;
+package in.co.sandbox.api.client.kyc;
 
 import java.io.IOException;
 
@@ -49,8 +49,15 @@ public class MCAClient extends RestClient
 	{
 		try
 		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.DIRECTOR_MASTER_DATA,
-			        Environment.get(sessionCredentials.getApiKey()), din, consent, reason));
+			JSONObject body = new JSONObject();
+
+			body.put("@entity", "in.co.sandbox.kyc.mca.master_data.request");
+			body.put("id", din);
+			body.put("consent", consent);
+			body.put("reason", reason);
+
+			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.DIRECTOR_MASTER_DATA,
+			        Environment.get(sessionCredentials.getApiKey()), din, consent, reason), body);
 
 			return response.get("data");
 		}
@@ -78,8 +85,16 @@ public class MCAClient extends RestClient
 	{
 		try
 		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.COMPANY_MASTER_DATA,
-			        Environment.get(sessionCredentials.getApiKey()), id, consent, reason));
+
+			JSONObject body = new JSONObject();
+
+			body.put("@entity", "in.co.sandbox.kyc.mca.master_data.request");
+			body.put("id", id);
+			body.put("consent", consent);
+			body.put("reason", reason);
+
+			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.COMPANY_MASTER_DATA,
+			        Environment.get(sessionCredentials.getApiKey()), id, consent, reason), body);
 
 			return response.get("data");
 		}

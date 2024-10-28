@@ -1,4 +1,4 @@
-package in.co.sandbox.api.client.bank;
+package in.co.sandbox.api.client.tds.compliance;
 
 import java.io.IOException;
 
@@ -13,47 +13,22 @@ import in.co.sandbox.api.types.ENDPOINTS.Environment;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class TaxPayerClient.
+ * The Class Public clientO.
  */
-public class TaxPayerClient extends RestClient
+public class PublicClient extends RestClient
 {
 
 	/**
-	 * Instantiates a new tax payer client.
+	 * Instantiates a new TDS compliance client.
 	 *
 	 * @param sessionCredentials
 	 *            the session credentials
 	 * @param enableDebugLog
 	 *            the enable debug log
 	 */
-	public TaxPayerClient(final ApiSessionCredentials sessionCredentials, final boolean enableDebugLog)
+	public PublicClient(final ApiSessionCredentials sessionCredentials, final boolean enableDebugLog)
 	{
 		super(sessionCredentials, enableDebugLog);
-	}
-
-	/**
-	 * Search GSTIN.
-	 *
-	 * @param gstin
-	 *            the gstin
-	 * @return the JSON object
-	 * @throws SandboxException
-	 *             the sandbox exception
-	 */
-	public JSONObject searchGSTIN(final String gstin) throws SandboxException
-	{
-
-		try
-		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.SEARCH_GSTIN,
-			        Environment.get(sessionCredentials.getApiKey()), gstin));
-
-			return response.get("data");
-		}
-		catch (final IOException e)
-		{
-			throw new SandboxException("Internal Server Error", 500);
-		}
 	}
 
 	/**
@@ -75,6 +50,31 @@ public class TaxPayerClient extends RestClient
 		{
 			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.SEARCH_TAN,
 			        Environment.get(sessionCredentials.getApiKey()), tan, consent, reason));
+
+			return response.get("data");
+		}
+		catch (final IOException e)
+		{
+			throw new SandboxException("Internal Server Error", 500);
+		}
+	}
+
+	/**
+	 * 206 AB and 206 CC Compliance Check.
+	 *
+	 * @param pan
+	 *            the pan
+	 * @return the JSON object
+	 * @throws SandboxException
+	 *             the sandbox exception
+	 */
+	public JSONObject complianceCheck(final String pan) throws SandboxException
+	{
+
+		try
+		{
+			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.SECTION_206AB_206CC_COMPLIANCE_CHECK_SYNC,
+			        Environment.get(sessionCredentials.getApiKey()), pan));
 
 			return response.get("data");
 		}

@@ -4,7 +4,7 @@
  * Confidential Information
  * Authored by Manav Darji
  */
-package in.co.sandbox.api.client.bank;
+package in.co.sandbox.api.client.kyc;
 
 import java.io.IOException;
 
@@ -84,6 +84,39 @@ public class BankClient extends RestClient
 		try
 		{
 			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.VERIFY_BANK_ACCOUNT,
+			        Environment.get(sessionCredentials.getApiKey()), ifsc, accountNumber, name, mobile));
+
+			return response.get("data");
+		}
+		catch (final IOException e)
+		{
+			throw new SandboxException("Internal Server Error", 500);
+		}
+
+	}
+
+	/**
+	 * Verify bank account penniless.
+	 *
+	 * @param ifsc
+	 *            the ifsc
+	 * @param accountNumber
+	 *            the account number
+	 * @param name
+	 *            the name
+	 * @param mobile
+	 *            the mobile
+	 * @return the JSON object
+	 * @throws SandboxException
+	 *             the sandbox exception
+	 */
+	public JSONObject verifyBankAccountPenniless(final String ifsc, final String accountNumber, final String name,
+	        final String mobile) throws SandboxException
+	{
+
+		try
+		{
+			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.VERIFY_BANK_ACCOUNT_PENNILESS,
 			        Environment.get(sessionCredentials.getApiKey()), ifsc, accountNumber, name, mobile));
 
 			return response.get("data");

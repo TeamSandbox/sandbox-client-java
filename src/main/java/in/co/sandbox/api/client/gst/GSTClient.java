@@ -16,14 +16,8 @@ import in.co.sandbox.api.client.RestClient;
 public class GSTClient extends RestClient
 {
 
-	/** The gsp. */
-	public GSPClient GSP;
-
-	/** The portal. */
-	public PortalClient PORTAL;
-
-	/** The calculator. */
-	public GSTCalculatorClient CALCULATOR;
+	/** The compliance. */
+	public ComplianceClient COMPLIANCE;
 
 	/**
 	 * Instantiates a new GST client.
@@ -37,12 +31,7 @@ public class GSTClient extends RestClient
 	{
 		super(apiSessionCredentials, enableDebugLog);
 
-		this.GSP = new GSPClient(apiSessionCredentials, enableDebugLog);
-
-		this.PORTAL = new PortalClient(apiSessionCredentials, enableDebugLog);
-
-		this.CALCULATOR = new GSTCalculatorClient(apiSessionCredentials, enableDebugLog);
-
+		this.COMPLIANCE = new ComplianceClient(apiSessionCredentials, enableDebugLog);
 	}
 
 }

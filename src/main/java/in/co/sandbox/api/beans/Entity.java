@@ -80,7 +80,7 @@ public class Entity implements Serializable
 
 		if (key.equals(CODE))
 		{
-			return (T) new Integer(modelJson.getInt(key));
+			return (T) Integer.valueOf(modelJson.getInt(key));
 		}
 
 		Object value = modelJson.get(key);

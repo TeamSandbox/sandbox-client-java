@@ -1,4 +1,4 @@
-package in.co.sandbox.api.client.bank;
+package in.co.sandbox.api.client.kyc;
 
 import in.co.sandbox.api.auth.ApiSessionCredentials;
 
@@ -18,9 +18,6 @@ public class KYCClient
 	/** The pan. */
 	public PANClient PAN;
 
-	/** The taxpayer. */
-	public TaxPayerClient TAXPAYER;
-
 	/**
 	 * Instantiates a new KYC client.
 	 *
@@ -37,7 +34,5 @@ public class KYCClient
 		this.MCA = new MCAClient(sessionCredentials, enableDebugLog);
 
 		this.PAN = new PANClient(sessionCredentials, enableDebugLog);
-
-		this.TAXPAYER = new TaxPayerClient(sessionCredentials, enableDebugLog);
 	}
 }

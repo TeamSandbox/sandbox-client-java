@@ -11,16 +11,7 @@ public class TDSClient extends RestClient
 {
 
 	/** The compliance. */
-	public TDSComplianceClient COMPLIANCE;
-
-	/** The calculator. */
-	public TDSCalculatorClient CALCULATOR;
-
-	/** The reporting. */
-	public TDSReportingClient REPORTING;
-
-	/** The returns. */
-	public TDSReturnsClient RETURNS;
+	public ComplianceClient COMPLIANCE;
 
 	/**
 	 * Instantiates a new TDS client.
@@ -34,13 +25,6 @@ public class TDSClient extends RestClient
 	{
 		super(sessionCredentials, enableDebugLog);
 
-		this.COMPLIANCE = new TDSComplianceClient(sessionCredentials, enableDebugLog);
-
-		this.CALCULATOR = new TDSCalculatorClient(sessionCredentials, enableDebugLog);
-
-		this.REPORTING = new TDSReportingClient(sessionCredentials, enableDebugLog);
-
-		this.RETURNS = new TDSReturnsClient(sessionCredentials, enableDebugLog);
-
+		this.COMPLIANCE = new ComplianceClient(sessionCredentials, enableDebugLog);
 	}
 }

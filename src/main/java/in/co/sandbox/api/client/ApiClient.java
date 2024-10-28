@@ -7,9 +7,8 @@
 package in.co.sandbox.api.client;
 
 import in.co.sandbox.api.auth.ApiSessionCredentials;
-import in.co.sandbox.api.client.bank.KYCClient;
 import in.co.sandbox.api.client.gst.GSTClient;
-import in.co.sandbox.api.client.roc.ROCClient;
+import in.co.sandbox.api.client.kyc.KYCClient;
 import in.co.sandbox.api.client.tds.TDSClient;
 
 // TODO: Auto-generated Javadoc
@@ -21,9 +20,6 @@ public class ApiClient
 
 	/** The kyc. */
 	public KYCClient KYC;
-
-	/** The roc. */
-	public ROCClient ROC;
 
 	/** The gst. */
 	public GSTClient GST;
@@ -43,8 +39,6 @@ public class ApiClient
 	{
 
 		this.KYC = new KYCClient(sessionCredentials, enableDebugLog);
-
-		this.ROC = new ROCClient(sessionCredentials, enableDebugLog);
 
 		this.GST = new GSTClient(sessionCredentials, enableDebugLog);
 
