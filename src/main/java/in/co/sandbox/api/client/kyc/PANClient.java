@@ -68,7 +68,7 @@ public class PANClient extends RestClient
 
 			body.put("@entity", "in.co.sandbox.kyc.pan_verification.request");
 			body.put("pan", pan);
-			body.put("name_as_per_pan", pan);
+			body.put("name_as_per_pan", nameAsPerPan);
 			body.put("date_of_birth", DateTimeFormat.forPattern("dd/MM/yyyy")
 			        .withZone(DateTimeZone.forID("Asia/Kolkata")).print(dateOfBirth));
 			body.put("consent", consent);

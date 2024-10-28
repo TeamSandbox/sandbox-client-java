@@ -57,7 +57,7 @@ public class MCAClient extends RestClient
 			body.put("reason", reason);
 
 			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.DIRECTOR_MASTER_DATA,
-			        Environment.get(sessionCredentials.getApiKey()), din, consent, reason), body);
+			        Environment.get(sessionCredentials.getApiKey())), body);
 
 			return response.get("data");
 		}
@@ -93,8 +93,9 @@ public class MCAClient extends RestClient
 			body.put("consent", consent);
 			body.put("reason", reason);
 
-			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.COMPANY_MASTER_DATA,
-			        Environment.get(sessionCredentials.getApiKey()), id, consent, reason), body);
+			ApiResponse response = super.postForGet(
+			        ENDPOINTS.build(ENDPOINTS.URL.COMPANY_MASTER_DATA, Environment.get(sessionCredentials.getApiKey())),
+			        body);
 
 			return response.get("data");
 		}

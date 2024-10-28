@@ -155,10 +155,10 @@ public final class ENDPOINTS
 	    /* MCA ENDPOINTS */
 
 		/** The director master data. */
-		DIRECTOR_MASTER_DATA("/mca/company/master-data/search"),
+		DIRECTOR_MASTER_DATA("/mca/director/master-data/search"),
 
 		/** The company master data. */
-		COMPANY_MASTER_DATA("/mca/director/master-data/search"),
+		COMPANY_MASTER_DATA("/mca/company/master-data/search"),
 
 	    /* GST ENDPOINTS */
 
@@ -172,9 +172,6 @@ public final class ENDPOINTS
 		SEARCH_GSTIN_BY_PAN("/gst/compliance/public/pan/search?state_code={state_code}"),
 
 	    /* BANK ENDPOINTS */
-
-		/** The Fetch Bank Details by IFSC. */
-		FETCH_BANK_DETAILS_BY_IFSC("/bank/{ifsc}"),
 
 		/** Verify Bank Account. */
 		VERIFY_BANK_ACCOUNT("/bank/{ifsc}/accounts/{account_number}/verify?name={name}&mobile={mobile}"),

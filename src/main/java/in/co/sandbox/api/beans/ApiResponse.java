@@ -36,7 +36,7 @@ public class ApiResponse extends Entity
 	 */
 	public boolean isError()
 	{
-		if ((Integer) super.get("code") != 200 && super.has("message"))
+		if ((Integer) super.get("code") != 200)
 		{
 			return true;
 		}

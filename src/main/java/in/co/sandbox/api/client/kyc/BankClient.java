@@ -38,31 +38,6 @@ public class BankClient extends RestClient
 	}
 
 	/**
-	 * Fetch bank details by ifsc.
-	 *
-	 * @param ifsc
-	 *            the ifsc
-	 * @return the JSON object
-	 * @throws SandboxException
-	 *             the sandbox exception
-	 */
-	public JSONObject fetchBankDetailsByIfsc(final String ifsc) throws SandboxException
-	{
-		try
-		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.FETCH_BANK_DETAILS_BY_IFSC,
-			        Environment.get(sessionCredentials.getApiKey()), ifsc));
-
-			return response.get("data");
-		}
-		catch (final IOException e)
-		{
-			throw new SandboxException("Internal Server Error", 500);
-		}
-
-	}
-
-	/**
 	 * Verify bank account.
 	 *
 	 * @param ifsc
@@ -131,20 +106,20 @@ public class BankClient extends RestClient
 	/**
 	 * Upi verification.
 	 *
-	 * @param virtual_payement_address
-	 *            the virtual payement address
+	 * @param virtualPaymentAddress
+	 *            the virtual payment address
 	 * @param name
 	 *            the name
 	 * @return the JSON object
 	 * @throws SandboxException
 	 *             the sandbox exception
 	 */
-	public JSONObject upiVerification(final String virtual_payement_address, final String name) throws SandboxException
+	public JSONObject upiVerification(final String virtualPaymentAddress, final String name) throws SandboxException
 	{
 		try
 		{
 			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.UPI_VERIFICATION,
-			        Environment.get(sessionCredentials.getApiKey()), virtual_payement_address, name));
+			        Environment.get(sessionCredentials.getApiKey()), virtualPaymentAddress, name));
 
 			return response.get("data");
 		}

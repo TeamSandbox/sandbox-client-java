@@ -1,7 +1,8 @@
 # Changelog
 
 ## v1.1.0
-* Updated gst gsp public client
+* Updated gst compliance public client
+* deprecated endpoints removed
 
 ## v1.0.2 - 27-09-2021
 * Support for UAT environment
