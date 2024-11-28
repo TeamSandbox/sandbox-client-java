@@ -40,7 +40,7 @@
 		<connection>scm:git:git://github.com/TeamQuicko/sandbox-client-java.git</connection>
 		<developerConnection>scm:git:git@github.com:TeamQuicko/sandbox-client-java.git</developerConnection>
 		<url>https://github.com/TeamQuicko/sandbox-client-java</url>
-		<tag>api-client-java-2.0.0-BUILD-RELEASE</tag>
+		<tag>api-client-java-2.1.0-BUILD-RELEASE</tag>
 	</scm>
 
 	<developers>
