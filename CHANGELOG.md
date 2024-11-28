@@ -1,5 +1,13 @@
 # Changelog
 
+## v2.1.0
+ * PAN-Aadhaar status API contract updated.
+ * UPI verification API removed
+ * PAN Basic API deprecated
+
+## v2.0.0
+ * Deprecated endpoints cleanup
+
 ## v1.1.0
 * Updated gst compliance public client
 * deprecated endpoints removed

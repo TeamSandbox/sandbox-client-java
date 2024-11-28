@@ -42,6 +42,37 @@ public class PANClient extends RestClient
 	}
 
 	/**
+	 * Verify PAN Basic.
+	 *
+	 * @param pan
+	 *            the pan
+	 * @param consent
+	 *            the consent
+	 * @param reason
+	 *            the reason
+	 * @return the pan
+	 * @throws SandboxException
+	 *             the sandbox exception
+	 */
+	@Deprecated
+	public PAN verifyPan(final String pan, final String consent, final String reason) throws SandboxException
+	{
+
+		try
+		{
+			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.VERIFY_PAN_BASIC,
+			        Environment.get(sessionCredentials.getApiKey()), pan, consent, reason));
+
+			return new PAN(response.get("data"));
+		}
+		catch (final IOException e)
+		{
+			throw new SandboxException("Internal Server Error", 500);
+		}
+
+	}
+
+	/**
 	 * Verify PAN.
 	 *
 	 * @param pan
@@ -93,17 +124,30 @@ public class PANClient extends RestClient
 	 *            the pan
 	 * @param aadhaarNumber
 	 *            the aadhaar number
+	 * @param consent
+	 *            the consent
+	 * @param reason
+	 *            the reason
 	 * @return the aadhaar link status
 	 * @throws SandboxException
 	 *             the sandbox exception
 	 */
-	public JSONObject getAadhaarLinkStatus(final String pan, final String aadhaarNumber) throws SandboxException
+	public JSONObject getAadhaarLinkStatus(final String pan, final String aadhaarNumber, final String consent,
+	        final String reason) throws SandboxException
 	{
 
 		try
 		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.GET_PAN_AADHAAR_LINK_STATUS,
-			        Environment.get(sessionCredentials.getApiKey()), pan, aadhaarNumber));
+			JSONObject body = new JSONObject();
+
+			body.put("@entity", "in.co.sandbox.kyc.pan_aadhaar.status");
+			body.put("pan", pan);
+			body.put("aadhaar_number", aadhaarNumber);
+			body.put("consent", consent);
+			body.put("reason", reason);
+
+			ApiResponse response = super.postForGet(ENDPOINTS.build(ENDPOINTS.URL.PAN_AADHAAR_LINK_STATUS,
+			        Environment.get(sessionCredentials.getApiKey()), pan, aadhaarNumber), body);
 
 			return response.get("data");
 		}

@@ -103,31 +103,4 @@ public class BankClient extends RestClient
 
 	}
 
-	/**
-	 * Upi verification.
-	 *
-	 * @param virtualPaymentAddress
-	 *            the virtual payment address
-	 * @param name
-	 *            the name
-	 * @return the JSON object
-	 * @throws SandboxException
-	 *             the sandbox exception
-	 */
-	public JSONObject upiVerification(final String virtualPaymentAddress, final String name) throws SandboxException
-	{
-		try
-		{
-			ApiResponse response = super.get(ENDPOINTS.build(ENDPOINTS.URL.UPI_VERIFICATION,
-			        Environment.get(sessionCredentials.getApiKey()), virtualPaymentAddress, name));
-
-			return response.get("data");
-		}
-		catch (final IOException e)
-		{
-			throw new SandboxException("Internal Server Error", 500);
-		}
-
-	}
-
 }

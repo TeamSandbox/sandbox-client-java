@@ -146,11 +146,14 @@ public final class ENDPOINTS
 
 	    /* PAN ENDPOINTS */
 
+		/** The verify pan basic. */
+		VERIFY_PAN_BASIC("/pans/{pan}/verify?consent={consent}&reason={reason}"),
+
 		/** The verify pan. */
 		VERIFY_PAN("/kyc/pan/verify"),
 
-		/** The get pan aadhaar link status. */
-		GET_PAN_AADHAAR_LINK_STATUS("/it-tools/pans/{pan}/pan-aadhaar-status?aadhaar_number={aadhaar_number}"),
+		/** The pan aadhaar link status. */
+		PAN_AADHAAR_LINK_STATUS("/kyc/pan-aadhaar/status"),
 
 	    /* MCA ENDPOINTS */
 
@@ -179,9 +182,6 @@ public final class ENDPOINTS
 		/** Verify Bank Account. */
 		VERIFY_BANK_ACCOUNT_PENNILESS(
 		        "/bank/{ifsc}/accounts/{account_number}/penniless-verify?name={name}&mobile={mobile}"),
-
-		/** The upi verification. */
-		UPI_VERIFICATION("/bank/upi/{virtual_payment_address}?name={name}"),
 
 	    /* TDS COMPLIANCE ENDPOINTS */
 
