@@ -11,6 +11,7 @@ import in.co.sandbox.api.client.tds.compliance.PublicClient;
 public class ComplianceClient extends RestClient
 {
 
+	/** The public. */
 	public PublicClient PUBLIC;
 
 	/**
